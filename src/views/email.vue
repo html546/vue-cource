@@ -1,11 +1,24 @@
 <template>
-  <div>
-    email:lison16new@163.com
+  <div class="email">
+    <button @click="handleClick">按我</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'email'
+  name: 'email',
+  mounted() {
+    console.log(this.$bus);
+  },
+  methods: {
+    handleClick() {
+      this.$bus.$emit('on-click', 'hello');
+    }
+  },
 }
 </script>
+<style>
+.email {
+  border: 1px solid green;
+}
+</style>
