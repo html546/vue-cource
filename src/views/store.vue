@@ -1,9 +1,6 @@
 <template>
   <div>
-    <a-input
-      :value="stateValue"
-      @input="handleStateValueChange"
-    />
+    <a-input v-model="stateValue" />
     <p> {{stateValue}} -> lastLetter is {{inputValueLastLetter}} </p>
     <!-- <a-show :content="inputValue" /> -->
     <p>appName:{{appName}},appNameWithVersion:{{appNameWithVersion}}</p>
@@ -43,9 +40,16 @@ export default {
       userName: state => state.user.userName,
       appName: state => state.appName,
       appVersion: state => state.appVersion,
-      todoList: state => state.user.todo ? state.user.todo.todoList : [],
-      stateValue: state => state.stateValue
+      todoList: state => state.user.todo ? state.user.todo.todoList : []
     }),
+    stateValue: {
+      get() {
+        return this.$store.state.stateValue
+      },
+      set(value) {
+        this.SET_STATE_VALUE(value)
+      }
+    },
     /* ...mapGetters([
       'firstLetter',
       'appNameWithVersion'
