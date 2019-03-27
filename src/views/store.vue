@@ -1,7 +1,10 @@
 <template>
   <div>
-    <a-input @input="handleInput" />
-    <p> {{inputValue}} -> lastLetter is {{inputValueLastLetter}} </p>
+    <a-input
+      :value="stateValue"
+      @input="handleStateValueChange"
+    />
+    <p> {{stateValue}} -> lastLetter is {{inputValueLastLetter}} </p>
     <!-- <a-show :content="inputValue" /> -->
     <p>appName:{{appName}},appNameWithVersion:{{appNameWithVersion}}</p>
     <p>userName:{{userName}},firstLetter is {{firstLetter}}</p>
@@ -40,7 +43,8 @@ export default {
       userName: state => state.user.userName,
       appName: state => state.appName,
       appVersion: state => state.appVersion,
-      todoList: state => state.user.todo ? state.user.todo.todoList : []
+      todoList: state => state.user.todo ? state.user.todo.todoList : [],
+      stateValue: state => state.stateValue
     }),
     /* ...mapGetters([
       'firstLetter',
@@ -72,7 +76,8 @@ export default {
   methods: {
     ...mapMutations([
       'SET_USER_NAME',
-      'SET_APP_NAME'
+      'SET_APP_NAME',
+      'SET_STATE_VALUE'
     ]),
     ...mapActions([
       'updateAppName'
@@ -92,6 +97,7 @@ export default {
       // this.$store.commit('SET_APP_VERSION')
     },
     changeUserName() {
+      // this.$store.state.user.userName = 'haha'; 错误的方法
       this.SET_USER_NAME('vue-cource')
       // this.$store.dispatch('updateAppName', '123');
     },
@@ -104,6 +110,9 @@ export default {
           ]
         }
       })
+    },
+    handleStateValueChange(val) {
+      this.SET_STATE_VALUE(val);
     }
   },
 }
