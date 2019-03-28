@@ -16,6 +16,6 @@ module.exports = {
   productionSourceMap: false,
   // 跨域配置
   devServer: {
-    proxy: 'http://localhost:4000'
+    proxy: 'http://dan.tushop.shop:88/'
   }
 }
